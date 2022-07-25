@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    static Scanner in = new Scanner(System.in);
+
+    static int n, m;
+
+    static char a[], b[];
+
+    /*
+
+    here we have to detect the sum of difference of every consecutive
+    pair bit between the binary string a and b
+
+    0 1            0 1            0 1            0 1
+    0 0 1 1 1 -> 0 0 1 1 1 -> 0 0 1 1 1 -> 0 0 1 1 1
+      1                           1              1   = 3
+
+    * best case is n == m that means the length of the two string is equal
+      that time we have to just iterate whole over the string and detect the 
+      difference between every bit of that binary string
+
+    * Here from the observation we can detect that the every number of one can 
+      mix with the all one between 1 up to m - n + 1. Where m is length of the
+      string b and n is the length of the string a. Now come for the 0 for the
+      string a. Here every 0 will be mix with the every number of 1 between the
+      1 up to m - n + 1.      
+
+    */
+
+    static void solve() {
+
+        long sum = 0;
+
+        if(n == m) {
+
+            // implementation of the best cases (1)
+
+            for(int i = 0; i < n; ++i) {
+
+                sum += Math.abs((a[i] - '0') - (b[i] - '0'));
+            
+            }
+
+        } else {
+
+            int diff = m - n + 1, ones = 0;
+
+            for(int i = 0; i < diff; ++i) {
+
+                if(b[i] - '0' == 1) ++ones; // count the total number one into 
+                                            // the following range
+
+            }
+
+            for(int i = 0; i < n; ++i) {
+
+                if(a[i] - '0' == 0) sum += ones; // (2)
+                else sum += (diff - ones); // (2)
+
+                if(i == n - 1) break; // break for the no right numbers bit 
+                                      // present
+
+                if(b[i] - '0' == 1) ones--;
+                if(b[i + diff] - '0' == 1) ++ones; // for the sliding of the 
+                                                   // one time, and started /
+                                                   // shift the 0th bit of the
+                                                   // present string to next of 
+                                                   // the differentiate position   
+
+            } 
+
+        }
+
+        System.out.print(sum);
+
+    }
+
+    public static void main(String[] args) {
+        
+        a = in.next().toCharArray();
+        b = in.next().toCharArray();
+
+        n = a.length;
+        m = b.length;
+
+        solve();
+
+    }
+
+}
