@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    static Scanner in = new Scanner(System.in);
+
+    static int n;
+
+    static char a[];
+
+    static void solve() {
+
+        StringBuilder sb = new StringBuilder();
+
+        int left = 0, right = 0;
+
+        sb.append("(");
+
+        for(int i = 0; i < n; ++i) {
+
+            if(a[i] == 'L') {
+
+                ++left;
+
+            } else if(a[i] == 'R') {
+
+                ++right;
+
+            }
+
+            sb.append(a[i]);
+
+            boolean b = false;
+
+            if(left == right) {
+
+                sb.append(")");
+                left = 0;
+                right = 0;
+
+                b = true;
+
+            }
+
+            if(b && i != n - 1) {
+
+                sb.append("(");
+
+            }
+
+        }
+
+        System.out.print(sb.toString());
+
+    }
+
+    public static void main(String[] args) {
+       
+       a = in.next().toCharArray();
+
+       n = a.length;
+
+       solve();
+
+    }
+}
