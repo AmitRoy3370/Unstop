@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    static Scanner in = new Scanner(System.in);
+
+    static char a[];
+
+    static char ch;
+
+    static void solve() {
+
+        int n = a.length;
+
+        int last_position = -1;
+
+        for(int i = 0; i < n; ++i) {
+
+            if(a[i] == ch) {
+
+                last_position = i;
+
+            }
+
+        }
+
+        if(last_position == -1) {
+
+            System.out.print(new String(a));
+            return;
+            
+        }
+		
+		StringBuilder sb = new StringBuilder();
+
+        for(int i = last_position; i < n; ++i) {
+
+            sb.append(a[i]);
+
+        }
+		
+		sb.reverse();
+		
+		char b[] = sb.toString().toCharArray();
+		
+		for(char i : b) {
+			
+			a[last_position++] = i;
+
+            if(last_position >= n) break;
+			
+		}
+
+        System.out.print(new String(a));
+
+    }
+
+    public static void main(String[] args) {
+        
+        a = in.next().toCharArray();
+
+        ch = in.next().charAt(0);
+
+        solve();
+        
+    }
+    
+}
