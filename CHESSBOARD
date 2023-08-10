@@ -1,0 +1,85 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Solution {
+
+  static Scanner in = new Scanner(System.in);
+
+  static char a[];
+
+  static int n;
+
+  static void solve() {
+
+    char ch[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+
+    boolean under_black = true, above_white = true;
+
+    int index = -1, m = ch.length;
+
+    for(int i = 0; i < m; ++i) {
+
+      if(a[0] == ch[i]) {
+
+        index = i;
+        break;
+
+      }
+
+    }
+
+    if(index % 2 == 1) {
+
+      under_black = false;
+
+    }
+
+    if(under_black && (a[1] - '0') % 2 == 1) {
+
+      System.out.println("Black");
+      return;
+
+    } 
+
+    if(under_black && (a[1] - '0') % 2 == 0) {
+
+      System.out.println("White");
+      return;
+
+    }
+
+    if(!under_black && (a[1] - '0') % 2 == 0) {
+
+      System.out.println("Black");
+      return;
+
+    } 
+
+    if(!under_black && (a[1] - '0') % 2 == 1) {
+
+      System.out.println("White");
+      return;
+      
+    }
+
+  }
+
+    public static void main(String[] args) {
+
+      input();
+      solve();
+       
+    }
+
+    private static void input() {
+
+      a = in.next().toLowerCase().toCharArray();
+
+      n = a.length;
+
+    }
+
+}
