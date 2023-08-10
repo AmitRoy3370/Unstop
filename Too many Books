@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+class Solution {
+
+  static Scanner in = new Scanner(System.in);
+
+  static int n;
+
+  static long a[];
+
+  static void solve() {
+
+    int dp[] = new int[n];
+
+    for(int i = 0; i < n; ++i) {
+
+      dp[i] = 1;
+
+    }
+
+    for(int i = 1; i < n; ++i) {
+
+      for(int j = 0; j < i; ++j) {
+
+        if(a[i] > a[j] && dp[i] < dp[j] + 1) {
+
+          dp[i] = dp[j] + 1;
+
+        }
+
+      }
+
+    }
+
+    int max = 0;
+
+    for(int i : dp) {
+
+      max = Math.max(max, i);
+
+    }
+
+    System.out.println(max);
+
+  }
+
+    public static void main(String[] args) {
+        
+        input();
+        solve();
+
+    }
+
+    private static void input() {
+
+      n = in.nextInt();
+
+      a = new long[n];
+
+      for(int i = 0; i < n; ++i) {
+
+        a[i] = in.nextLong();
+
+      }
+
+    }
+
+}
