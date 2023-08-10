@@ -1,0 +1,69 @@
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+
+class Solution {
+
+    static Scanner in = new Scanner(System.in);
+
+    static int testCases, n, k;
+
+    static String a[];
+
+    static void solve() {
+
+      Map<String, Integer> map = new HashMap<>();
+
+      for(String i : a) {
+
+        map.put(i, map.getOrDefault(i, 0) + 1);
+
+      }
+
+      int index = 0;
+
+      for(String i : a) {
+
+        if(map.getOrDefault(i, 0) > 1) {
+
+          continue;
+
+        }
+
+        ++index;
+
+        if(index == k) {
+
+          System.out.println(i);
+          return;
+
+        }
+        
+      }
+
+    }
+
+    public static void main(String[] args) {
+        
+        input();
+        solve();
+
+    }
+
+    private static void input() {
+
+      n = in.nextInt();
+
+      a = new String[n];
+
+      for(int i = 0; i < n; ++i) {
+
+        a[i] = in.next();
+
+      }
+
+      k = in.nextInt();
+
+    }
+
+}
