@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+class Solution {
+
+  static Scanner in = new Scanner(System.in);
+
+  static int n;
+
+  static long a[];
+
+  static StringBuilder ans = new StringBuilder();
+
+  static void solve() {
+
+    long final_ans[] = new long[n];
+
+    long max_price = 0L;
+
+    for(int i = n - 1; i >= 0; --i) {
+
+      if(a[i] >= max_price) {
+
+        final_ans[i] = 0L;
+        max_price = a[i];
+        continue;
+
+      }
+
+      int ans = 1;
+
+      while(a[i + ans] <= a[i]) {
+
+        ans += final_ans[i + ans];
+
+      }
+
+      final_ans[i] = ans;
+
+    }
+
+    StringBuilder sb = new StringBuilder();
+
+    for(long i : final_ans) {
+
+      sb.append(i).append(" ");
+
+    }
+
+    ans.append(sb.toString().trim()).append("\n");
+
+  }
+
+    public static void main(String[] args) {
+
+      input();
+      solve();
+
+      System.out.print(ans.toString());
+        
+    }
+
+    private static void input() {
+
+      n = in.nextInt();
+      
+       a = new long[n];
+
+       for(int i = 0; i < n; ++i) {
+
+         a[i] = in.nextLong();
+
+       }
+
+    }
+
+}
