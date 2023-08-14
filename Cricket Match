@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+class Solution {
+
+    static Scanner in = new Scanner(System.in);
+
+    static int n;
+
+    static long a[];
+
+    static void solve() {
+
+      boolean can_win = true;
+
+      boolean dp[] = new boolean[n];
+
+      dp[n - 1] = true;
+
+      for(int i = n - 2; i >= 0; --i) {
+
+        int c = 0;
+
+        for(int j = 1; j + i < n && j <= a[i]; ++j) {
+
+          if(dp[i + j] == true) {
+
+            ++c;
+            dp[i] = true;
+            break;
+
+          }
+
+        }
+
+        if(c == 0) {
+
+          dp[i] = false;
+
+        }
+
+      }
+
+      can_win = dp[0];
+
+      System.out.println(can_win);
+
+    }
+
+    public static void main(String[] args) {
+        
+      input();
+      solve();
+        
+    }
+
+    private static void input() {
+
+      n = in.nextInt();
+
+      a = new long[n];
+
+      for(int i = 0; i < n; ++i) {
+
+        a[i] = in.nextLong();
+
+      }
+
+    }
+
+}
