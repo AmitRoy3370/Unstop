@@ -1,0 +1,75 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static Scanner in = new Scanner(System.in);
+
+    static int n;
+
+    static long a[];
+
+    static void solve() {
+        
+        long sum = 0L;
+        
+        for(long i : a) {
+            
+            sum += i;
+            
+        }
+        
+        if(sum % 2L != 0L) {
+            
+            System.out.println("NO");
+            return;
+            
+        }
+        
+        boolean dp[] = new boolean[(int)sum / 2 + 1];
+        
+        dp[0] = true;
+        
+        for(int i = 0; i < n; ++i) {
+            
+            for(int j = (int)sum / 2; j > a[i] - 1; --j) {
+               
+               dp[j] |= dp[j - (int)a[i]];
+               
+            }
+            
+        }
+        
+        if(dp[(int)sum / 2]) {
+            
+            System.out.println("YES");
+            
+        } else {
+            
+            System.out.println("NO");
+            
+        }
+
+    }
+
+    public static void main(String[] args) {
+        
+      input();
+      solve();
+        
+    }
+
+    private static void input() {
+
+      n = in.nextInt();
+
+      a = new long[n];
+
+      for(int i = 0; i < n; ++i) {
+
+        a[i] = in.nextLong();
+
+      }
+
+    }
+
+}
